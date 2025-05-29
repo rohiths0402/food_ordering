@@ -7,11 +7,7 @@
 .logo {
   text-align: center;
 }
-.logo img {
-  width: calc(100% - 60%);
-  object-fit: contain;
-  margin-top: -40px;
-}
+
 
 .logo h5 {
   font-weight: 600;
