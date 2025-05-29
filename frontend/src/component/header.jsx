@@ -4,6 +4,8 @@ import { Container } from "reactstrap";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import { cartUiActions } from "../store/CartUISlice";
+
 import "../styles/header.css";
 
 const nav__links = [
@@ -38,7 +40,8 @@ const Header = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    // Define the scroll handler once
+    const handleScroll = () => {
       if (
         document.body.scrollTop > 80 ||
         document.documentElement.scrollTop > 80
@@ -47,9 +50,14 @@ const Header = () => {
       } else {
         headerRef.current.classList.remove("header__shrink");
       }
-    });
+    };
 
-    return () => window.removeEventListener("scroll");
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup listener properly with the same handler
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
