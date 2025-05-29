@@ -78,23 +78,45 @@ def login():
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    data = request.json
-    username = data.get('username', '').strip()
-    password = data.get('password', '').strip()
-    role = data.get('role', '').lower().strip()
-    country = data.get('country', '').capitalize().strip()
+    try:
+        data = request.json
+        username = data.get('username', '').strip()
+        password = data.get('password', '').strip()
+        role = data.get('role', '').lower().strip()
+        country = data.get('country', '').capitalize().strip()
 
-    if not username or not password or role not in ['admin', 'manager', 'member'] or country not in COUNTRY_TAX_CONFIG:
-        return jsonify({'message': 'Invalid signup data'}), 400
+        print("Signup data received:", data)
+        print(f"Parsed signup info - username: {username}, role: {role}, country: {country}")
 
-    if mongo.db.users.find_one({'username': username}):
-        return jsonify({'message': 'User already exists'}), 400
+        if not username or not password or role not in ['admin', 'manager', 'member'] or country not in COUNTRY_TAX_CONFIG:
+            return jsonify({'message': 'Invalid signup data'}), 400
 
-    hashed_pw = generate_password_hash(password)
-    user = {'username': username, 'password': hashed_pw, 'role': role, 'country': country}
-    result = mongo.db.users.insert_one(user)
+        existing_user = mongo.db.users.find_one({'username': username})
+        if existing_user:
+            print(f"Signup failed: Username '{username}' already exists")
+            return jsonify({'message': 'User already exists'}), 400
 
-    return jsonify({'message': 'User created', 'id': str(result.inserted_id)}), 201
+        hashed_pw = generate_password_hash(password)
+
+        user = {
+            'username': username,
+            'password': hashed_pw,
+            'role': role,
+            'country': country
+        }
+
+        result = mongo.db.users.insert_one(user)
+        print(f"User created with id: {result.inserted_id}")
+
+        return jsonify({'message': 'User created', 'id': str(result.inserted_id)}), 201
+
+    except Exception as e:
+        import traceback
+        print("Exception during signup:", e)
+        traceback.print_exc()
+        return jsonify({'message': 'Internal Server Error'}), 500
+
+
 
 
 # Cart
@@ -132,21 +154,16 @@ def list_restaurants():
     return jsonify(restaurants)
 
 @app.route('/food', methods=['GET'])
+
 @access_control(['admin', 'manager', 'member'])
 def list_food_items():
-    country = request.user.get('country')
-    if not country:
-        return jsonify({"error": "Country not found in user data"}), 400
-
+    country = request.user['country']
     foods = []
-    restaurants = mongo.db.restaurants.find({'country': country})
-    for restaurant in restaurants:
-        items = restaurant.get('items', [])
-        if isinstance(items, list):
-            foods.extend(items)
-
+    orders = mongo.db.restaurants.find({'country': country})
+    for order in orders:
+        for item in order.get('items', []):
+            foods.append(item)
     return jsonify(foods)
-
 
 # Orders
 @app.route('/orders', methods=['POST'])

@@ -91,9 +91,12 @@ const Cart = () => {
                   <button className="addTOCart__btn me-4">
                     <Link to="/foods">Continue Shopping</Link>
                   </button>
-                  <button className="addTOCart__btn">
-                    <Link to="/checkout">Proceed to checkout</Link>
-                  </button>
+                  {(localStorage.getItem("role") === "admin" ||
+                    localStorage.getItem("role") === "manager") && (
+                    <button className="addTOCart__btn">
+                      <Link to="/checkout">Proceed to checkout</Link>
+                    </button>
+                  )}
                 </div>
               </div>
             </Col>

@@ -91,7 +91,6 @@ const Home = () => {
 
   return (
     <Helmet title="Home">
-      {/* Hero Section */}
       <section>
         <Container>
           <Row>
@@ -132,18 +131,20 @@ const Home = () => {
             </Col>
             <Col lg="6" md="6">
               <div className="hero__img">
-                <img src="/images/hero.png" alt="hero-img" className="w-100" />
+                <img
+                  src="src/assets/hero.png"
+                  alt="Smiling delivery person holding a food bag, standing in front of a bright kitchen background. Text in image: HUNGRY? Just wait food at your door. The scene feels cheerful and welcoming, suggesting fast and friendly food delivery."
+                  className="w-100"
+                />
               </div>
             </Col>
           </Row>
         </Container>
       </section>
-
       {/* Category */}
       <section className="pt-0">
         <Category />
       </section>
-
       {/* Features */}
       <section>
         <Container>
@@ -179,7 +180,6 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-
       {/* Popular Foods */}
       <section>
         <Container>
@@ -221,7 +221,6 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-
       {/* Why Us */}
       <section className="why__choose-us">
         <Container>
@@ -259,7 +258,6 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-
       {/* Hot Pizza */}
       <section className="pt-0">
         <Container>
@@ -275,7 +273,6 @@ const Home = () => {
           </Row>
         </Container>
       </section>
-
       {/* Testimonials */}
       <section>
         <Container>

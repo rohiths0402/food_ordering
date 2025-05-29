@@ -148,8 +148,13 @@ const Checkout = () => {
                   />
                 </div>
                 <button type="submit" className="addTOCart__btn">
-                  Payment
+                  Submit
                 </button>
+                {localStorage.getItem("role") === "admin" && (
+                  <button className="addTOCart__btn">
+                    <Link to="/checkout">Pay with Paypal</Link>
+                  </button>
+                )}
               </form>
             </Col>
 

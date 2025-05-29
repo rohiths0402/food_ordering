@@ -20,7 +20,7 @@ const AllFoods = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/food", {
+        const response = await fetch("http://localhost:5000/restaurants", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
