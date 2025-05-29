@@ -4,6 +4,10 @@
   background: #fde4e4;
 }
 
+.footer__logo img {
+  width: calc(100% - 80%);
+  margin-bottom: 5px;
+}
 
 .footer__logo h5 {
   font-weight: 600;

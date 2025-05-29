@@ -7,7 +7,7 @@ import CartItem from "./cartItem.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { cartUiActions } from "../../../store/CartUISlice.js";
 
-import "../../../styles/shopping-cart.css";
+import "../../../styles/cart.css";
 
 const Carts = () => {
   const dispatch = useDispatch();

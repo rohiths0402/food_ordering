@@ -1,14 +1,12 @@
-import { useState } from "react";
-import Header from "./component/header";
-import Footer from "./component/footer";
+import React from "react";
+import Layout from "./component/layout";
 
 import "./App.css";
 
 function App() {
   return (
     <>
-      <Header />
-      <Footer />
+      <Layout />
     </>
   );
 }
