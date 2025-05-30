@@ -21,8 +21,8 @@ mongo = PyMongo(app)
 
 paypalrestsdk.configure({
     "mode": "sandbox",
-    "client_id": "ASynPwGjKT4hKHPrtXeK9P4QMeCSoU4fX0ZLekoYSGoT0PyVOJ5L-IA-RDC6MRpItwNGUssVnhv2GyTR",
-    "client_secret": "EGtkClVtorItbUlHE-mshWdiPZHqnt3PF5sgcYz5cqLzYXqbUm88TpHzJfCh24zx-mLnPNgfgqLE4xCJ"
+    "client_id": "",
+    "client_secret": ""
 })
 
 COUNTRY_TAX_CONFIG = {
